@@ -1,0 +1,26 @@
+name: Arduino CI
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Install Arduino CLI
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+        echo "$HOME/bin" >> $GITHUB_PATH
+
+    - name: Compile Code
+      run: |
+        arduino-cli core update-index
+        arduino-cli core install arduino:avr
+        arduino-cli compile --fqbn arduino:avr:uno functions/driver_motor/test.ino
