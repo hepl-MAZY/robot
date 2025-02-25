@@ -1,0 +1,14 @@
+# Ignore Arduino compiled files
+*.hex
+*.elf
+*.bin
+
+# Ignore VSCode settings
+.vscode/
+*.code-workspace
+
+# Ignore log files
+*.log
+
+# Ignore environment variables and secrets
+.env
